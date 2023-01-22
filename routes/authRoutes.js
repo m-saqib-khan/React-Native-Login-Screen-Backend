@@ -28,10 +28,12 @@ router.post("/signin", async (req, res) => {
   if (!user) {
     return res.send({ error: "invalid email password" });
   }
-  if (user.email === email) {
+  if (user.email === email && user.password === password) {
     console.log("asdasdasdaszxczxczx");
     const token = jwt.sign({ userId: user._id }, jwtkey);
     res.send({ token });
+  } else {
+    return res.send({ error: "invalid email password" });
   }
 });
 
