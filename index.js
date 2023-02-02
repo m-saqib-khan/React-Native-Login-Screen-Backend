@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 require('dotenv').config()
 const app = express();
-const PORT = 3000;
+const PORT = 9000;
 const { mongoURL } = require("./keys");
 
 require("./models/UserSchema");
@@ -24,12 +24,13 @@ mongoose.connection.on("connected", () => {
 mongoose.connection.on("error", (err) => {
   console.log("connection error", err);
 });
+app.use("/payment",require("./routes/payment"))
+
 app.get("/",requireAuth,(req,res)=>{
     res.send("tour email"+req.user.email)
 })
-app.get("/", (req, res) => {
-  res.send("hello");
-});
+
+
 
 app.listen(PORT, () => {
   console.log("server running" + PORT);

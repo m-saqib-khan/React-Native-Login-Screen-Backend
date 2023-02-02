@@ -12,7 +12,7 @@ router.post("/signup", async (req, res) => {
     const user = new User({ email, password, name });
     await user.save();
     const token = jwt.sign({ userId: user._id }, jwtkey);
-    res.send({succes:true,token});
+    res.send({succes:true,token,id:user._id});
   } catch (error) {
     return res.json({succes:false , msg:"ERROR",error});
   }
@@ -32,7 +32,7 @@ router.post("/signin", async (req, res) => {
   if (user.email === email && user.password === password) {
     console.log("asdasdasdaszxczxczx");
     const token = jwt.sign({ userId: user._id }, jwtkey);
-    res.send({succes:true, token });
+    res.send({succes:true, token,id:user._id });
   } else {
     return res.send({succes:false, error: "invalid email password" });
   }
