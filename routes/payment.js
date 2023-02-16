@@ -12,7 +12,6 @@ const {
 const { json } = require("body-parser");
 const Stripe = require("stripe")(process.env.PRIVATE_KEY);
 
-
 router.post("/get-payment-intend", async (req, res) => {
   console.log("reach")
   let orderID = uuidv4();

@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-require('dotenv').config()
+require("dotenv").config();
 const app = express();
 const PORT = 9000;
 const { mongoURL } = require("./keys");
@@ -24,13 +24,14 @@ mongoose.connection.on("connected", () => {
 mongoose.connection.on("error", (err) => {
   console.log("connection error", err);
 });
-app.use("/payment",require("./routes/payment"))
 
-app.get("/",requireAuth,(req,res)=>{
-    res.send("tour email"+req.user.email)
-})
+app.use("/payment", require("./routes/payment"));
 
+app.use("/merchant", require("./routes/merchant"));
 
+app.get("/", requireAuth, (req, res) => {
+  res.send("tour email" + req.user.email);
+});
 
 app.listen(PORT, () => {
   console.log("server running" + PORT);
